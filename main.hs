@@ -9,16 +9,27 @@ import System.IO
 
 main :: IO ()
 
-iterateOverArgs :: [String] -> IO ()
-iterateOverArgs [] = return ()
-iterateOverArgs (x:xs) = do
-  openAndPrintFile x
-  iterateOverArgs xs
+printList :: [String] -> IO ()
+printList [] = return ()
+printList (x:xs) = do
+  putStrLn x
+  printList xs
 
+openAndPrintFileLines :: String -> IO ()
+openAndPrintFileLines s = do
+  contents <- readFile s
+  contents_lines <- lines contents
+  printList contents_lines
+
+{-
 openAndPrintFile :: String -> IO ()
 openAndPrintFile s = do
   contents <- readFile s
   putStrLn contents
+
+splitByNewLine :: String -> [String]
+splitByNewLine s = lines s
+-}
 
 main = do
   putStrLn "Include Counter - v 0.0.1"
@@ -37,5 +48,5 @@ main = do
     putStrLn("    Command line arguments: " ++ show args)
 
   -- Open files in list and print them
-    iterateOverArgs args
+    printList args
 
