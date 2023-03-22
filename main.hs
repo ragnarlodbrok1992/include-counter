@@ -18,18 +18,7 @@ printList (x:xs) = do
 openAndPrintFileLines :: String -> IO ()
 openAndPrintFileLines s = do
   contents <- readFile s
-  contents_lines <- lines contents
-  printList contents_lines
-
-{-
-openAndPrintFile :: String -> IO ()
-openAndPrintFile s = do
-  contents <- readFile s
-  putStrLn contents
-
-splitByNewLine :: String -> [String]
-splitByNewLine s = lines s
--}
+  printList (lines contents)
 
 main = do
   putStrLn "Include Counter - v 0.0.1"
@@ -49,4 +38,5 @@ main = do
 
   -- Open files in list and print them
     printList args
+    -- openAndPrintFileLines (lines args)
 
